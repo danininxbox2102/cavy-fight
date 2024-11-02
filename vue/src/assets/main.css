@@ -1,0 +1,17 @@
+#app{
+  height: 100%;
+  width: 100%;
+  background: #141720;
+  aspect-ratio: 21/9;
+}
+
+body{
+    height: 100vh;
+    margin: 0;
+    display: flex;
+}
+
+html, body {
+  touch-action: manipulation; /* Для предотвращения масштабирования */
+  overscroll-behavior: contain; /* Чтобы предотвратить прокрутку */
+}
