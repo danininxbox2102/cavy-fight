@@ -1,91 +1,118 @@
 export class Vector2D {
+  private x: number = 0
+  private y: number = 0
 
-    _x = 0;
-    _y = 0;
+  constructor(x: number, y: number) {
+    this.x = x
+    this.y = y
+  }
 
-    constructor(x, y) {
-        this._x = x;
-        this._y = y;
-    }
+  getX() {
+    return this.x
+  }
 
-    getX() {
-        return this._x;
-    }
+  getY() {
+    return this.y
+  }
 
-    getY() {
-        return this._y;
-    }
+  /**
+   * Set x for 2d vector.
+   * @param x - Number to set
+   */
+  setX(x: number) {
+    this.x = x
+    return this
+  }
 
-    /**
-     * Set x for 2d vector.
-     * @param x - Number to set
-     */
-    setX(x) {
-        this._x = x;
-        return this
-    }
+  /**
+   * Set y for 2d vector.
+   * @param y - Number to set
+   */
+  setY(y: number) {
+    this.y = y
+    return this
+  }
 
-    /**
-     * Set y for 2d vector.
-     * @param y - Number to set
-     */
-    setY(y) {
-        this._y = y;
-        return this
-    }
+  clone() {
+    return new Vector2D(this.x, this.y)
+  }
 
-    clone() {
-        return new Vector2D(this._x, this._y);
-    }
+  toString() {
+    return '(' + this.x + ', ' + this.y + ')'
+  }
 
-    toString() {
-        return "("+this._x+", "+this._y+")";
-    }
+  toJSON() {
+    return { x: this.x, y: this.y }
+  }
 
-    toJSON() {
-        return {x: this._x, y: this._y};
-    }
+  add(x: number, y: number) {
+    this.x += x
+    this.y += y
+    return this
+  }
 
-    add(x, y) {
-        this._x += x;
-        this._y += y;
-        return this
-    }
+  addVec(vector: Vector2D) {
+    this.x += vector.getX()
+    this.y += vector.getY()
+    return this
+  }
 
-    addVec(vector) {
-        this._x += vector.x;
-        this._y += vector.y;
-        return this
-    }
+  subtract() {
+    this.x -= this.x
+    this.y -= this.y
+    return this
+  }
 
-    subtract() {
-        this._x -= this._x;
-        this._y -= this._y;
-        return this
-    }
+  subtractVec(vector: Vector2D) {
+    this.x -= vector.getX()
+    this.y -= vector.getY()
+    return this
+  }
 
-    subtractVec(vector) {
-        this._x -= vector.x;
-        this._y -= vector.y;
-        return this
-    }
+  reverse() {
+    this.x -= this.x
+    this.y -= this.y
+    return this
+  }
 
-    reverse() {
-        this._x -= this._x;
-        this._y -= this._y;
-        return this
-    }
+  rotate(rads: number) {
+    const cos = Math.cos(rads)
+    const sin = Math.sin(rads)
 
-    rotate(rads) {
-        const cos = Math.cos(rads)
-        const sin = Math.sin(rads)
+    const ox = this.getX()
+    const oy = this.getY()
 
-        const ox = this.x
-        const oy = this.y
+    this.x = ox * cos - oy * sin
+    this.y = ox * sin + oy * cos
 
-        this.x = ox * cos - oy * sin
-        this.y = ox * sin + oy * cos
+    return this
+  }
+}
 
-        return this
-    }
+export class CavyUtils {
+  static getMousePosition(canvas: HTMLCanvasElement, event: PointerEvent) {
+    let rect = canvas.getBoundingClientRect()
+    let x = event.clientX - rect.left
+    let y = event.clientY - rect.top
+    return new Vector2D(x, y)
+  }
+
+  static mapToRange(x: number, range: number): number {
+    // Используем модуль для получения остатка от деления
+    return ((x - 1) % range) + 1
+  }
+
+  static msToTime(duration: number): string {
+    const milliseconds = Math.floor((duration % 1000) / 100)
+    const seconds = Math.floor((duration / 1000) % 60)
+    const minutes = Math.floor((duration / (1000 * 60)) % 60)
+    const hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
+
+    const formattedHours = hours < 10 ? '0' + hours : String(hours)
+    const formattedMinutes = minutes < 10 ? '0' + minutes : String(minutes)
+    const formattedSeconds = seconds < 10 ? '0' + seconds : String(seconds)
+    const formattedMilliseconds = milliseconds < 10 ? '0' + milliseconds : String(milliseconds)
+
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}.${formattedMilliseconds}`
+  }
 }

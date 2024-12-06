@@ -1,46 +1,59 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const count = ref(0)
 
-import { CavyFight } from '../assets/js/CavyFight'
+import { CavyFight } from '@/assets/js/CavyFight'
+import { EventRegistry } from '@/assets/js/events/EventRegistry'
+import MenuCmp from '@/components/MenuCmp.vue'
 
 const cavyFight = CavyFight.getInstance()
 
-const tap = () => {
-  cavyFight.tap()
+const tap = (event: PointerEvent) => {
+  cavyFight.tap(event)
   count.value = cavyFight.getTapCount()
 }
 
-cavyFight.addToInitQueue(() => {
+window.addEventListener(EventRegistry.APP_INIT_EVENT, () => {
   count.value = cavyFight.getTapCount()
 })
 </script>
 
 <template>
-  <div @click="tap" class="mining-body">
-    <div class="bal-cont">
-      <div class="coin-img"></div>
-      <div class="ballance">{{ count }}</div>
+  <div class="mining-wrapper">
+    <div @click="tap" class="mining-body">
+      <div class="bal-cont">
+        <div class="coin-img"></div>
+        <div class="ballance">{{ count }}</div>
+      </div>
+      <div class="cavy-cont">
+        <div class="circle"></div>
+        <div class="cavy"></div>
+      </div>
     </div>
-    <div class="cavy-cont">
-      <div class="circle"></div>
-      <div class="cavy"></div>
-    </div>
+    <MenuCmp />
   </div>
 </template>
 
 <style>
+.mining-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .mining-body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   position: relative;
-  height: 60%;
+  height: 55vh;
+  width: 100%;
   background: #1a1e29;
   border-radius: 46px 46px 0 0;
-  padding: 50px 0 50px 0;
+  padding: 50px 0 25px 0;
 }
 
 .bal-cont {
@@ -74,12 +87,10 @@ cavyFight.addToInitQueue(() => {
 
 .cavy {
   bottom: 0;
-  background: url(/src/assets/images/cavy.jpg);
   height: 480px;
-  border-radius: 67px;
   aspect-ratio: 1 / 1.9;
-  background-position: center;
-  background-size: cover;
+  background: url('../assets/images/cavy0.png') no-repeat center;
+  background-size: 75%;
   position: absolute;
 }
 

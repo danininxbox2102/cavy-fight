@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import Page1 from './Page1Cmp.vue'
 </script>
 

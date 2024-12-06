@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const exit = () => {
   window.Telegram.WebApp.close()
 }
@@ -57,7 +57,7 @@ const exit = () => {
 }
 
 .image {
-  background: url(/src/assets/images/brokenUrl.png);
+  background: url('@/assets/images/brokenUrl.png');
   height: 340px;
   aspect-ratio: 1;
   background-size: cover;

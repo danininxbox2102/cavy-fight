@@ -1,4 +1,4 @@
-<script setup></script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="main-container">
@@ -52,7 +52,7 @@
 }
 
 .image {
-  background: url(/src/assets/images/brokenUrl.png);
+  background: url('@/assets/images/brokenUrl.png');
   height: 340px;
   aspect-ratio: 1;
   background-size: cover;

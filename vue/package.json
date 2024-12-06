@@ -12,11 +12,16 @@
   },
   "dependencies": {
     "@telegram-apps/sdk": "^2.5.2",
+    "js-cookie": "^3.0.5",
+    "js-logger": "^1.6.1",
     "vue": "^3.4.29",
-    "vue-tg": "^0.8.0"
+    "vue-tg": "^0.8.0",
+    "vue2-touch-events": "^3.2.3",
+    "vue3-touch-events": "^4.2.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
+    "@types/js-cookie": "^3.0.6",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/eslint-config-prettier": "^9.0.0",
     "eslint": "^8.57.0",

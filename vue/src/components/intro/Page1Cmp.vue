@@ -1,5 +1,5 @@
-<script setup>
-import { CavyFight } from '@/assets/js/CavyFight'
+<script setup lang="ts">
+import { CavyFight } from '@/assets/js/CavyFight.ts'
 
 const play = () => {
   CavyFight.getInstance().createNewAccount()
@@ -24,11 +24,10 @@ const play = () => {
 
 <style scoped>
 .main-container {
-  background: url(/src/assets/images/cavyPoster.png);
   width: 100%;
   height: 100%;
   background-size: auto 120%;
-  background-position: center;
+  background: url('@/assets/images/cavyPoster.png') center;
 }
 
 .gradient {
